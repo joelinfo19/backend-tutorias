@@ -16,14 +16,16 @@ dbConnection()
 //directorio publico
 app.use(express.static('public'))
 
-// app.use('/api/usuarios',require('./routes/usuarios'))
-// app.use('/api/hospitales',require('./routes/hospitales'))
-// app.use('/api/medicos',require('./routes/medicos'))
+app.use('/api/usuarios',require('./routes/usuarios'))
+app.use('/api/estudiantes',require('./routes/estudiantes'))
+app.use('/api/docentes',require('./routes/docentes'))
+app.use('/api/tutorias',require('./routes/tutorias'))
+
 // app.use('/api/todo',require('./routes/busquedas'))
 // app.use('/api/upload',require('./routes/uploads'))
 //
 //
-// app.use('/api/login',require('./routes/auth'))
+app.use('/api/login',require('./routes/auth'))
 
 
 app.listen(process.env.PORT,()=>{
