@@ -1,7 +1,12 @@
 const fs=require('fs')
 const Usuario=require('../models/usuario')
-const Medico=require('../models/medico')
-const Hospital=require('../models/hospital')
+const Estudiante=require('../models/estudiante')
+const Docente=require('../models/docente')
+
+// const Medico=require('../models/medico')
+// const Hospital=require('../models/hospital')
+// const Medico;
+// const Hospital;
 const borrarImagen=(path)=>{
     if(fs.existsSync(path)){
         //borrar la imagen
@@ -12,34 +17,34 @@ const borrarImagen=(path)=>{
 const actualizarImagen= async (tipo,id,nombreArchivo)=>{
     let pathViejo=''
     switch (tipo) {
-        case 'medicos':
-            const medico=await Medico.findById(id)
-            if (!medico){
+        case 'docentes':
+            const docente=await Docente.findById(id)
+            if (!docente){
                 console.log('No es un Medico por id')
                 return false
             }
-            pathViejo=`./uploads/medicos/${medico.img}`
+            pathViejo=`./uploads/docentes/${docente.img}`
             borrarImagen(pathViejo)
 
-            medico.img=nombreArchivo
+            docente.img=nombreArchivo
 
-            await medico.save()
+            await docente.save()
             return true
 
 
             break;
-        case 'hospitales':
-            const hospital=await Hospital.findById(id)
-            if (!hospital){
+        case 'estudiantes':
+            const estudiante=await Estudiante.findById(id)
+            if (!estudiante){
                 console.log('No es un Medico por id')
                 return false
             }
-            pathViejo=`./uploads/hospitales/${hospital.img}`
+            pathViejo=`./uploads/estudiantes/${estudiante.img}`
             borrarImagen(pathViejo)
 
-            hospital.img=nombreArchivo
+            estudiante.img=nombreArchivo
 
-            await hospital.save()
+            await estudiante.save()
             return true
             break;
         case 'usuarios':

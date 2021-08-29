@@ -100,10 +100,31 @@ const borrarEstudiante=async (req,res=response)=>{
         })
     }
 }
+const getEstudianteById = async(req, res = response) => {
 
+    const id = req.params.id;
+
+    try {
+        const estudiante = await Estudiante.findById(id)
+
+
+        res.json({
+            ok: true,
+            estudiante
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            ok: true,
+            msg: 'Hable con el administrador'
+        })
+    }
+}
 module.exports={
     getEstudiantes,
     crearEstudiante,
     actualizarEstudiante,
-    borrarEstudiante
+    borrarEstudiante,
+    getEstudianteById
 }

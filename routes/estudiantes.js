@@ -1,7 +1,7 @@
 const {validarJWT,validarADMIN_ROLE,validarADMIN_ROLE_o_MismoUsuario} = require("../middlewares/validar-jwt");
 const {body}=require('express-validator')
 const {Router}=require('express')
-const {getEstudiantes,crearEstudiante,actualizarEstudiante,borrarEstudiante}=require('../controllers/estudiantes')
+const {getEstudiantes,crearEstudiante,actualizarEstudiante,borrarEstudiante,getEstudianteById}=require('../controllers/estudiantes')
 const router=Router()
 const {validarCampos}=require('../middlewares/validar-campos')
 
@@ -34,7 +34,10 @@ router.put('/:id',[
 ],actualizarEstudiante)
 
 router.delete('/:id',borrarEstudiante)
-
+router.get( '/:id',
+    validarJWT,
+    getEstudianteById
+);
 
 
 module.exports=router
