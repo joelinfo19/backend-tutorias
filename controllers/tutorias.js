@@ -94,10 +94,31 @@ const borrarTutoria=async (req,res=response)=>{
         })
     }
 }
+const getTutoriaById = async(req, res = response) => {
 
+    const id = req.params.id;
+
+    try {
+        const tutoria = await Tutoria.findById(id)
+
+
+        res.json({
+            ok: true,
+            tutoria
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            ok: true,
+            msg: 'Hable con el administrador'
+        })
+    }
+}
 module.exports={
     getTutorias,
     crearTutoria,
     actualizarTutoria,
-    borrarTutoria
+    borrarTutoria,
+    getTutoriaById
 }

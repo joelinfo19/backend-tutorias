@@ -1,7 +1,7 @@
 const {validarJWT,validarADMIN_ROLE,validarADMIN_ROLE_o_MismoUsuario} = require("../middlewares/validar-jwt");
 const {body}=require('express-validator')
 const {Router}=require('express')
-const {getTutorias,crearTutoria,actualizarTutoria,borrarTutoria}=require('../controllers/tutorias')
+const {getTutorias,crearTutoria,actualizarTutoria,borrarTutoria,getTutoriaById}=require('../controllers/tutorias')
 const router=Router()
 const {validarCampos}=require('../middlewares/validar-campos')
 
@@ -36,7 +36,10 @@ router.put('/:id',[
     validarCampos
 
 ],actualizarTutoria)
-
+router.get( '/:id',
+    validarJWT,
+    getTutoriaById
+);
 router.delete('/:id',borrarTutoria)
 
 

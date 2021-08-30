@@ -3,7 +3,7 @@ const {response}=require('express')
 const Usuario=require('../models/usuario')
 const Estudiantes=require('../models/estudiante')
 const Docentes=require('../models/docente')
-
+const Tutorias=require('../models/tutoria')
 const getTodo=async (req,res=response)=>{
     const busqueda=req.params.busqueda
     const regex=new RegExp(busqueda,'i')
@@ -16,7 +16,7 @@ const getTodo=async (req,res=response)=>{
     // const hospitales=await Hospitales.find({
     //     nombre: regex
     // })
-    const [usuarios,estudiantes,docentes]=await Promise.all([
+    const [usuarios,estudiantes,docentes,tutorias]=await Promise.all([
         Usuario.find({
             nombre: regex
         }),
@@ -25,6 +25,9 @@ const getTodo=async (req,res=response)=>{
         }),
         Docentes.find({
             nombre: regex
+        }),
+        Tutorias.find({
+            direccion: regex
         }),
 
 
@@ -36,6 +39,7 @@ const getTodo=async (req,res=response)=>{
         usuarios,
         estudiantes,
         docentes,
+        tutorias,
         busqueda
     })
 }
@@ -52,6 +56,16 @@ const getDocumentoCollections=async (req,res=response)=>{
             })
                 // .populate('usuario','nombre img')
                 // .populate('hospital','nombre img')
+
+
+
+            break;
+        case 'tutorias':
+            data=await Tutorias.find({
+                direccion: regex
+            })
+            .populate('estudiante','nombre img')
+            .populate('docente','nombre img')
 
 
 

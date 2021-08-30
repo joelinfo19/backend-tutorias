@@ -21,6 +21,7 @@ const getMenuFrontEnd=(role='USER_ROLE')=>{
                // {titulo:'Usuarios',url:'usuarios'},
                 {titulo:'Estudiantes',url:'estudiantes'},
                 {titulo:'Docentes',url:'docentes'},
+                {titulo:'Tutorias',url:'tutorias'},
 
 
             ]

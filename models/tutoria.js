@@ -14,7 +14,7 @@ const TutoriaSchema=Schema({
 
     },
     fecha :{
-        type:Date,
+        type:Object,
         required:true,
 
     },

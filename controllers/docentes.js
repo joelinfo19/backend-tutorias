@@ -61,7 +61,7 @@ const crearDocente= async (req,res=response)=>{
         const docenteDB= await docente.save()
         res.json({
             ok: true,
-            estudiante:docenteDB
+            docente:docenteDB
         })
     }catch (error){
         console.log(error)
@@ -96,7 +96,7 @@ const actualizarDocente=async (req,res=response)=>{
         res.json({
             ok: true,
             msg:'actualizardocente',
-            estudiante:docenteActualizado
+            docente:docenteActualizado
         })
     }catch (error){
         console.log(error)
@@ -131,10 +131,32 @@ const borrarDocente=async (req,res=response)=>{
         })
     }
 }
+const getDocenteById = async(req, res = response) => {
+
+    const id = req.params.id;
+
+    try {
+        const docente = await Docente.findById(id)
+
+
+        res.json({
+            ok: true,
+            docente
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            ok: true,
+            msg: 'Hable con el administrador'
+        })
+    }
+}
 
 module.exports={
     getDocentes,
     crearDocente,
     actualizarDocente,
-    borrarDocente
+    borrarDocente,
+    getDocenteById
 }

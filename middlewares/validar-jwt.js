@@ -2,6 +2,7 @@
 
 const jwt=require('jsonwebtoken')
 const Usuario=require('../models/usuario')
+const Docente=require('../models/docente')
 const validarJWT=(req,res,next)=>{
 
     //leer el token
@@ -79,8 +80,34 @@ const validarADMIN_ROLE_o_MismoUsuario=async (req,res,next)=>{
         })
     }
 }
+const validarDOCENTE_ROLE=async (req,res,next)=>{
+    const uid=req.uid
+    try{
+        const docenteDB= await Docente.findById(uid)
+        if(!docenteDB){
+            return res.status(404).json({
+                ok:false,
+                msg:'docente no existe'
+            })
+        }
+        if(docenteDB.role!== 'ADMIN_ROLE'){
+            return res.status(403).json({
+                ok:false,
+                msg:'No tiene privilegios para ahcer eso'
+            })
+        }
+        next()
+    }catch(error){
+        res.status(500).json({
+            ok:false,
+            msg:'Hable con el amdmin'
+        })
+    }
+}
+
 module.exports={
     validarJWT,
     validarADMIN_ROLE,
-    validarADMIN_ROLE_o_MismoUsuario
+    validarADMIN_ROLE_o_MismoUsuario,
+    validarDOCENTE_ROLE
 }
