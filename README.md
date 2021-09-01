@@ -1,7 +1,7 @@
 # Tutorias - Backend
 
-This backend is made in Express.js
-Data Base is made in MONGODB
+* This backend is made in Express.js
+* Data Base is made in MONGODB
 
 Remember to run
 ```
